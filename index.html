@@ -1,1 +1,73 @@
-<!DOCTYPE html>\n<html lang="bn">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>প্রেমের ওয়েবসাইট</title>\n    <style>\n        body {\n            background-color: #ffcccc;\n            font-family: Arial, sans-serif;\n            text-align: center;\n        }\n        h1 {\n            color: #ff007f;\n            animation: fadeIn 2s;\n        }\n        @keyframes fadeIn {\n            from { opacity: 0; }\n            to { opacity: 1; }\n        }\n        .love-meter {\n            font-size: 24px;\n            margin: 20px;\n            color: #d4006d;\n        }\n        .emoji {\n            font-size: 50px;\n            animation: float 5s infinite;\n        }\n        @keyframes float {\n            0% { transform: translatey(0); }\n            50% { transform: translatey(-20px); }\n            100% { transform: translatey(0); }\n        }\n    </style>\n</head>\n<body>\n    <h1>প্রেমের ওয়েবসাইটে স্বাগতম</h1>\n    <div class="love-meter">আপনার প্রেমের মিটার: 80%</div>\n    <div class="emoji">💖</div>\n    <script>\n        // Celebration Animation\n        document.addEventListener('click', () => {\n            alert('🎉 অভিনন্দন! আপনার প্রেম আরও গভীর হলো!');\n        });\n    </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Interactive Website</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .love-meter { width: 100%; background-color: #f3f3f3; border: 1px solid #ddd; border-radius: 5px; }
+        .meter-fill { width: 0; height: 30px; background-color: red; border-radius: 5px; }
+        .emoji { position: fixed; font-size: 24px; animation: float 3s infinite; }
+        @keyframes float { 
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); } 
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Love Meter!</h1>
+    <p>Answer the questions below:</p>
+    <div>
+        <label for="question1">What is your favorite romantic movie?</label><br>
+        <input type="text" id="question1" name="question1"><br><br>
+        <label for="question2">What is your idea of a perfect date?</label><br>
+        <input type="text" id="question2" name="question2"><br><br>
+        <button onclick="calculateLoveMeter()">Calculate Love Meter</button>
+    </div>
+    <div class="love-meter">
+        <div class="meter-fill" id="meterFill"></div>
+    </div>
+    <p id="loveScore"></p>
+    <div id="celebration" style="display:none; text-align:center;">
+        🎉🎊 Congratulations! 🎊🎉
+    </div>
+    <script>
+        function calculateLoveMeter() {
+            const score = Math.floor(Math.random() * 100);
+            document.getElementById('meterFill').style.width = score + '%';
+            document.getElementById('loveScore').innerText = 'Love Score: ' + score + '%';
+            if (score > 80) {
+                document.getElementById('celebration').style.display = 'block';
+                createFloatingEmojis();
+            }
+        }
+
+        function createFloatingEmojis() {
+            const emojis = ['❤️', '😍', '💖', '💘', '😘'];
+            for (let i = 0; i < 10; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji';
+                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.top = '100vh';
+                document.body.appendChild(emoji);
+                animateEmoji(emoji);
+            }
+        }
+
+        function animateEmoji(emoji) {
+            const distance = Math.random() * 100 + 50;
+            emoji.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-' + distance + 'vh)' }], {
+                duration: 3000,
+                easing: 'ease-in-out',
+                fill: 'forwards'
+            });
+            setTimeout(() => {
+                emoji.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
