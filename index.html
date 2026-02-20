@@ -3,82 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Dish Washer? 💝</title>
+    <title>Interactive Romantic Website</title>
     <style>
-        body {
-            background: linear-gradient(to bottom, #ffafbd, #ffc3a0);
-            color: #ff4757;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 36px;
-            margin-top: 50px;
-        }
-        .emoji {
-            font-size: 50px;
-        }
-        button {
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #ff8787;
-        }
-        .love-meter {
-            margin-top: 20px;
-            font-size: 24px;
-        }
-        .heart {
-            animation: float 3s infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
+        body { font-family: Arial, sans-serif; background-color: #ffe6f2; overflow: hidden; }
+        .container { text-align: center; padding: 50px; }
+        h1 { color: #ff66b2; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .love-meter { font-size: 24px; margin: 20px; }
+        .emoji { font-size: 48px; display: inline-block; animation: float 3s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
     </style>
 </head>
 <body>
-    <h1>Will You Be My Dish Washer? 💝</h1>
-    <div class="emoji">💖🐻</div>
-    <div class="questions">
-        <p>Eibar er jonne maf kore diso?</p>
-        <button onclick="answerQuestion(1)">Answer</button>
-        <p>Good girl, ek glass pani ani dao?</p>
-        <button onclick="answerQuestion(2)">Answer</button>
-        <p>Ami ki beshi jalai?</p>
-        <button onclick="answerQuestion(3)">Answer</button>
+    <div class="container">
+        <h1>Welcome to the Ultimate Love Experience!</h1>
+        <div class="love-meter" id="loveMeter">💖 Love Meter: 0%</div>
+        <div class="question-container">
+            <h2>Share Your Thoughts:</h2>
+            <textarea id="userResponse" rows="4" cols="50" placeholder="Type your romantic thoughts here..."></textarea><br>
+            <button onclick="submitResponse()">Submit</button>
+        </div>
+        <div class="celebration" id="celebration" style="display:none;">
+            <h2>🎉 Celebration 🎉</h2>
+            <p id="dynamicMessage">Your love is shining!</p>
+        </div>
+        <div class="floating-emojis">
+            <span class="emoji">❤️</span>
+            <span class="emoji">😍</span>
+            <span class="emoji">💌</span>
+        </div>
     </div>
-    <div class="love-meter">Love Meter: <span id="meter-percentage">0%</span></div>
-    <div class="celebration" id="celebration-display"></div>
     <script>
-        const loveMeter = document.getElementById('meter-percentage');
-        const celebrationDisplay = document.getElementById('celebration-display');
-        let lovePercentage = 0;
-
-        function answerQuestion(questionNumber) {
-            lovePercentage += 33;
-            loveMeter.innerText = lovePercentage + '%';
-
-            if (lovePercentage >= 100) {
-                celebrate();
-            }
+        let loveMeter = 0;
+        function submitResponse() {
+            const response = document.getElementById('userResponse').value;
+            loveMeter += 20; // Incrementing love meter by 20%
+            document.getElementById('loveMeter').innerText = `💖 Love Meter: ${loveMeter}%`;
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('celebration').style.display = 'block';
+            dynamicCelebrate();
         }
-
-        function celebrate() {
-            celebrationDisplay.innerHTML = '<p>🎉 You are amazing! 💖</p>';
-            const hearts = document.createElement('div');
-            hearts.innerHTML = '\u2665'.repeat(10);
-            celebrationDisplay.appendChild(hearts);
-            hearts.className = 'heart';
+        function dynamicCelebrate() {
+            const messages = [
+                'Your love is shining!',
+                'You are the best!',
+                'Love is in the air!',
+                'You make my heart skip a beat!'
+            ];
+            const dynamicMessage = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('dynamicMessage').innerText = dynamicMessage;
+            setTimeout(() => { document.getElementById('celebration').style.display = 'none'; }, 3000);
         }
     </script>
 </body>
