@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Romantic Website</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #ffe6f0; text-align: center; }
+        .emoji { font-size: 50px; position: absolute; animation: float 5s linear infinite; }
+        @keyframes float { 
+            0% { transform: translateY(0); } 
+            50% { transform: translateY(-20px); } 
+            100% { transform: translateY(0); } 
+        }
+        .love-meter { margin-top: 20px; }
+        .celebration { display: none; }
+    </style>
+    <script>
+        function showLoveMeter() {
+            const meter = Math.floor(Math.random() * 101);
+            document.getElementById('meterValue').innerText = meter + '%';
+            document.getElementById('celebration').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to the Love Meter!</h1>
+    <div>
+        <span class="emoji" style="top: 20%; left: 10%;">❤️</span>
+        <span class="emoji" style="top: 40%; left: 30%;">😍</span>
+        <span class="emoji" style="top: 60%; left: 60%;">🌹</span>
+        <span class="emoji" style="top: 80%; left: 80%;">💘</span>
+    </div>
+    <h2>Are you in love?</h2>
+    <button onclick="showLoveMeter()">Check Love Meter</button>
+    <div class="love-meter">
+        <p>Your love meter is at: <span id="meterValue">0%</span></p>
+    </div>
+    <div class="celebration" id="celebration">
+        <h2>🎉 Celebration Time! 🎉</h2>
+        <p>Share your love with the world!</p>
+    </div>
+</body>
+</html>
